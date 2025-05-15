@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizify - Create Your Own Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --light-gray: #f5f7fa;
+            --border: #e1e5ee;
+            --text: #2b2d42;
+            --text-light: #8d99ae;
+            --error: #ef233c;
+            --success: #06d6a0;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text);
+            padding: 20px;
+        }
+        
+        .quiz-creator {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+        
+        .creator-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .creator-header h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .question-form {
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .answer-options {
+            margin-top: 20px;
+        }
+        
+        .answer-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .answer-input {
+            flex: 1;
+            margin-right: 10px;
+        }
+        
+        .correct-checkbox {
+            display: flex;
+            align-items: center;
+        }
+        
+        .correct-checkbox input {
+            margin-right: 8px;
+        }
+        
+        .add-answer {
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+            background: none;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .add-answer i {
+            margin-right: 5px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .preview-section {
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+        }
+        
+        .preview-question {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+        }
+        
+        .preview-answers {
+            margin-top: 15px;
+        }
+        
+        .preview-answer {
+            padding: 10px 15px;
+            background: white;
+            border-radius: var(--radius);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .correct-answer {
+            border-left: 4px solid var(--success);
+        }
+        
+        .correct-badge {
+            background: var(--success);
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="quiz-creator">
+        <div class="creator-header">
+            <h2>Create Your Own Quiz Question</h2>
+            <p>Build custom questions and mark the correct answers</p>
+        </div>
+        
+        <div class="question-form">
+            <div class="form-group">
+                <label for="question-text">Question</label>
+                <textarea id="question-text" class="form-control" rows="3" placeholder="Enter your question here..."></textarea>
+            </div>
+            
+            <div class="answer-options">
+                <label>Answer Options</label>
+                <div id="answer-container">
+                    <!-- Answer options will be added here -->
+                </div>
+                <button type="button" class="add-answer" id="add-answer">
+                    <i class="fas fa-plus-circle"></i> Add Another Answer
+                </button>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button type="button" class="btn btn-outline" id="reset-btn">
+                Reset Form
+            </button>
+            <button type="button" class="btn btn-primary" id="preview-btn">
+                Preview Question
+            </button>
+        </div>
+        
+        <div class="preview-section" id="preview-section" style="display: none;">
+            <h3>Question Preview</h3>
+            <div class="preview-question">
+                <div id="preview-question-text"></div>
+                <div class="preview-answers" id="preview-answers">
+                    <!-- Preview answers will appear here -->
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button type="button" class="btn btn-primary" id="save-btn">
+                    Save Question
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const answerContainer = document.getElementById('answer-container');
+            const addAnswerBtn = document.getElementById('add-answer');
+            const previewBtn = document.getElementById('preview-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const saveBtn = document.getElementById('save-btn');
+            const previewSection = document.getElementById('preview-section');
+            const questionText = document.getElementById('question-text');
+            const previewQuestionText = document.getElementById('preview-question-text');
+            const previewAnswers = document.getElementById('preview-answers');
+            
+            let answerCount = 0;
+            
+            // Add initial answer fields
+            addAnswerField();
+            addAnswerField();
+            
+            // Add answer field
+            addAnswerBtn.addEventListener('click', addAnswerField);
+            
+            // Reset form
+            resetBtn.addEventListener('click', resetForm);
+            
+            // Preview question
+            previewBtn.addEventListener('click', previewQuestion);
+            
+            // Save question (in a real app, this would send to server)
+            saveBtn.addEventListener('click', saveQuestion);
+            
+            function addAnswerField() {
+                if (answerCount >= 6) {
+                    alert('Maximum of 6 answers allowed');
+                    return;
+                }
+                
+                const answerId = `answer-${answerCount}`;
+                const answerRow = document.createElement('div');
+                answerRow.className = 'answer-row';
+                answerRow.innerHTML = `
+                    <div class="answer-input">
+                        <input type="text" id="${answerId}" class="form-control" placeholder="Enter answer option">
+                    </div>
+                    <div class="correct-checkbox">
+                        <input type="radio" name="correct-answer" id="correct-${answerCount}">
+                        <label for="correct-${answerCount}">Correct</label>
+                    </div>
+                    <button type="button" class="remove-answer" data-answer="${answerId}" style="background: none; border: none; color: var(--error); margin-left: 10px; cursor: pointer;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                answerContainer.appendChild(answerRow);
+                answerCount++;
+                
+                // Add event listener to remove button
+                const removeBtn = answerRow.querySelector('.remove-answer');
+                removeBtn.addEventListener('click', function() {
+                    if (answerCount <= 2) {
+                        alert('You need at least 2 answer options');
+                        return;
+                    }
+                    answerContainer.removeChild(answerRow);
+                    answerCount--;
+                });
+            }
+            
+            function resetForm() {
+                answerContainer.innerHTML = '';
+                questionText.value = '';
+                answerCount = 0;
+                addAnswerField();
+                addAnswerField();
+                previewSection.style.display = 'none';
+            }
+            
+            function previewQuestion() {
+                const question = questionText.value.trim();
+                if (!question) {
+                    alert('Please enter a question');
+                    return;
+                }
+                
+                const answers = [];
+                let hasCorrectAnswer = false;
+                
+                // Get all answer inputs
+                const answerInputs = answerContainer.querySelectorAll('.answer-row');
+                answerInputs.forEach(row => {
+                    const input = row.querySelector('input[type="text"]');
+                    const isCorrect = row.querySelector('input[type="radio"]:checked');
+                    
+                    if (input.value.trim()) {
+                        answers.push({
+                            text: input.value.trim(),
+                            correct: !!isCorrect
+                        });
+                        
+                        if (isCorrect) hasCorrectAnswer = true;
+                    }
+                });
+                
+                if (answers.length < 2) {
+                    alert('You need at least 2 answer options');
+                    return;
+                }
+                
+                if (!hasCorrectAnswer) {
+                    alert('Please mark the correct answer');
+                    return;
+                }
+                
+                // Display preview
+                previewQuestionText.textContent = question;
+                previewAnswers.innerHTML = '';
+                
+                answers.forEach(answer => {
+                    const answerElement = document.createElement('div');
+                    answerElement.className = `preview-answer ${answer.correct ? 'correct-answer' : ''}`;
+                    answerElement.textContent = answer.text;
+                    
+                    if (answer.correct) {
+                        const badge = document.createElement('span');
+                        badge.className = 'correct-badge';
+                        badge.textContent = 'Correct';
+                        answerElement.appendChild(badge);
+                    }
+                    
+                    previewAnswers.appendChild(answerElement);
+                });
+                
+                previewSection.style.display = 'block';
+            }
+            
+            function saveQuestion() {
+                // In a real application, this would send the data to your server
+                const question = questionText.value.trim();
+                const answers = [];
+                
+                const answerInputs = answerContainer.querySelectorAll('.answer-row');
+                answerInputs.forEach(row => {
+                    const input = row.querySelector('input[type="text"]');
+                    const isCorrect = row.querySelector('input[type="radio"]:checked');
+                    
+                    if (input.value.trim()) {
+                        answers.push({
+                            text: input.value.trim(),
+                            correct: !!isCorrect
+                        });
+                    }
+                });
+                
+                // Here you would typically make an AJAX call to your backend
+                console.log('Saving question:', { question, answers });
+                alert('Question saved successfully! (This is a demo - in a real app it would save to your database)');
+                
+                // Reset form after saving
+                resetForm();
+            }
+        });
+    </script>
+</body>
+</html>

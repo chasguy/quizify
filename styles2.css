@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0a0f2b;
+}
+
+.container {
+    display: flex;
+    gap: 2rem;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-card {
+    background: linear-gradient(145deg, #093a68, #0a56a0);
+    border-radius: 15px;
+    padding: 20px;
+    width: 300px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.main-logo {
+    font-size: 2em;
+    margin-bottom: 2em;
+    font-weight: bold;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button-group button {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #0a56a0;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.button-group button:hover {
+    background-color: #093a68;
+}

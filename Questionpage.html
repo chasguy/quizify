@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz Tutorials</title>
+    <meta name="description" content="Test your knowledge with our interactive quiz platform">
+    <link rel="stylesheet" href="quiz2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Knowledge Check</h1>
+            <p class="tagline">Test your skills with our interactive quizzes</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="quiz-app">
+            <div class="quiz-info">
+                <div class="quiz-meta">
+                    <span id="quiz-category">General Knowledge</span>
+                    <span id="quiz-difficulty">Medium</span>
+                </div>
+                <div class="quiz-progress">
+                    <span id="question-counter">Question 1 of 10</span>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 10%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-area">
+                <h2 id="question">Loading question...</h2>
+                <div id="answer-buttons" class="answer-grid">
+                    <!-- Answers will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <div class="quiz-controls">
+                <button id="prev-btn" class="control-btn" disabled aria-label="Previous question">
+                    <span class="icon">←</span> Previous
+                </button>
+                <div class="quiz-score">
+                    <span>Score: <span id="score">0</span></span>
+                </div>
+                <button id="next-btn" class="control-btn primary" aria-label="Next question">
+                    Next <span class="icon">→</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="quiz-results hidden">
+            <h2>Quiz Completed!</h2>
+            <p>Your final score: <span id="final-score">0</span> out of <span id="total-questions">0</span></p>
+            <div class="result-details">
+                <p id="result-message">Keep practicing to improve!</p>
+            </div>
+            <button id="restart-btn" class="primary">Take Another Quiz</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2023 Quiz Tutorials. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script2.js" defer></script>
+</body>
+</html>

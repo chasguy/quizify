@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizify - Log In</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary-color: #f8f9fa;
+            --text-color: #2b2d42;
+            --light-text: #8d99ae;
+            --border-color: #dee2e6;
+            --white: #ffffff;
+            --error-color: #f72585;
+            --success-color: #4cc9f0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f1faee;
+            background-image: linear-gradient(135deg, #f1faee 0%, #e2f3f8 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .login-logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .login-subtitle {
+            color: var(--light-text);
+            margin-bottom: 30px;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .login-footer {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+
+        .login-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+            
+            .login-logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-logo">Quizify</div>
+            <div class="login-subtitle">Welcome back! Please log in to continue</div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username or Email</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username or email" required>
+                    <div class="error-message" id="usernameError">Please enter a valid username or email</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
+                </div>
+                
+                <button type="submit" class="btn">Log In</button>
+            </form>
+            
+            <div class="login-footer">
+                Don't have an account? <a href="signup.html">Sign up</a><br>
+                <a href="forgot-password.html">Forgot password?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            // Reset error messages
+            document.getElementById('usernameError').style.display = 'none';
+            document.getElementById('passwordError').style.display = 'none';
+            
+            // Validate inputs
+            let isValid = true;
+            
+            if (username === '') {
+                document.getElementById('usernameError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (password.length < 6) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // If valid, proceed with login
+            if (isValid) {
+                // Here you would typically send the data to your server
+                console.log('Login attempt with:', { username, password });
+                
+                // For demo purposes, redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>

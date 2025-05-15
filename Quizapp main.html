@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizify - Test Your Knowledge</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary-color: #f8f9fa;
+            --accent-color: #4cc9f0;
+            --text-color: #2b2d42;
+            --light-text: #8d99ae;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f1faee 0%, #e2f3f8 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .main-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-logo {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .main-tagline {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            min-width: 160px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .features {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .feature-desc {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: var(--text-color);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-logo {
+                font-size: 2.5rem;
+            }
+            
+            .main-card {
+                padding: 40px 25px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="main-card">
+            <div class="main-logo">QUIZIFY</div>
+            <p class="main-tagline">Test your knowledge, challenge your friends, and climb the leaderboards with our interactive quiz platform.</p>
+            
+            <div class="button-group">
+                <a href="signup.html" class="btn btn-primary">Get Started - It's Free</a>
+                <a href="login.html" class="btn btn-outline">I Have an Account</a>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3 class="feature-title">Diverse Categories</h3>
+                <p class="feature-desc">From science to pop culture, we've got quizzes on every topic imaginable.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3 class="feature-title">Compete & Win</h3>
+                <p class="feature-desc">Join tournaments and climb the leaderboards to show off your knowledge.</

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizify - View All Quizzes</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4361ee;
+        }
+
+        .quiz-list {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .quiz-item {
+            background-color: white;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .quiz-title {
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        .btn-start {
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-start:hover {
+            background-color: #3a56d4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All Available Quizzes</h1>
+        <ul class="quiz-list" id="quiz-list">
+            <!-- Quizzes will be dynamically loaded here -->
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample list of quizzes (Replace with backend data later)
+            const quizzes = [
+                { id: 1, title: 'General Knowledge Quiz' },
+                { id: 2, title: 'Science Trivia' },
+                { id: 3, title: 'World History Challenge' }
+            ];
+
+            const quizList = document.getElementById('quiz-list');
+
+            quizzes.forEach(quiz => {
+                const li = document.createElement('li');
+                li.className = 'quiz-item';
+                li.innerHTML = `
+                    <span class="quiz-title">${quiz.title}</span>
+                    <button class="btn-start" onclick="window.location.href='questionpage.html?id=${quiz.id}'">Start Quiz</button>
+                `;
+                quizList.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>

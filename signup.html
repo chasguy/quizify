@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizify - Join Our Community</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary-color: #f8f9fa;
+            --accent-color: #4cc9f0;
+            --text-color: #2b2d42;
+            --light-text: #8d99ae;
+            --error-color: #f72585;
+            --success-color: #4cc9f0;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f1faee 0%, #e2f3f8 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .signup-container {
+            width: 100%;
+            max-width: 500px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .signup-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signup-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .signup-logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .signup-subtitle {
+            color: var(--light-text);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--light-text);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+
+        .login-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .password-strength {
+            height: 4px;
+            background-color: #e0e0e0;
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--error-color);
+            transition: width 0.3s ease;
+        }
+
+        .password-hints {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-top: 5px;
+        }
+
+        .password-hints ul {
+            padding-left: 20px;
+        }
+
+        .password-hints li {
+            margin-bottom: 3px;
+        }
+
+        .password-hints .valid {
+            color: var(--success-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .signup-card {
+                padding: 30px 20px;
+            }
+            
+            .signup-logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-card">
+            <div class="signup-logo">Join Quizify</div>
+            <p class="signup-subtitle">Create your account to start quizzing</p>
+            
+            <form class="signup-form" id="signupForm">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" class="form-control" placeholder="Enter your first name" required>
+                    <div class="error-message" id="firstNameError">Please enter your first name</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" class="form-control" placeholder="Enter your last name" required>
+                    <div class="error-message" id="lastNameError">Please enter your last name</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="Choose a username" required>
+                    <div class="error-message" id="usernameError">Username must be 4-20 characters</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" class="form-control" placeholder="Create a password" required>
+                        <i class="toggle-password fas fa-eye" id="togglePassword"></i>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="password-hints" id="passwordHints">
+                        <ul>
+                            <li id="lengthHint">At least 8 characters</li>
+                            <li id="numberHint">Contains a number</li>
+                            <li id="specialHint">Contains a special character</li>
+                            <li id="upperHint">Contains uppercase letter</li>
+                        </ul>
+                    </div>
+                    <div class="error-message" id="passwordError">Password must meet requirements</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Re-enter your password" required>
+                        <i class="toggle-password fas fa-eye" id="toggleConfirmPassword"></i>
+                    </div>
+                    <div class="error-message" id="confirmPasswordError">Passwords don't match</div>
+                </div>
+                
+                <button type="submit" class="btn">Create Account</button>
+            </form>
+            
+            <div class="login-link">
+                Already have an account? <a href="login.html">Log in</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('signupForm');
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const strengthBar = document.getElementById('strengthBar');
+            const passwordHints = document.getElementById('passwordHints').querySelectorAll('li');
+            
+            // Toggle password visibility
+            [togglePassword, toggleConfirmPassword].forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const input = this.id === 'togglePassword' ? passwordInput : confirmPasswordInput;
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            });
+            
+            // Password strength checker
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                
+                // Check password requirements
+                const hasLength = password.length >= 8;
+                const hasNumber = /\d/.test(password);
+                const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+                const hasUpper = /[A-Z]/.test(password);
+                
+                // Update hints
+                document.getElementById('lengthHint').className = hasLength ? 'valid' : '';
+                document.getElementById('numberHint').className = hasNumber ? 'valid' : '';
+                document.getElementById('specialHint').className = hasSpecial ? 'valid' : '';
+                document.getElementById('upperHint').className = hasUpper ? 'valid' : '';
+                
+                // Calculate strength
+                if (hasLength) strength += 25;
+                if (hasNumber) strength += 25;
+                if (hasSpecial) strength += 25;
+                if (hasUpper) strength += 25;
+                
+                // Update strength bar
+                strengthBar.style.width = strength + '%';
+                strengthBar.style.backgroundColor = 
+                    strength < 50 ? 'var(--error-color)' : 
+                    strength < 75 ? '#ff9800' : 'var(--success-color)';
+            });
+            
+            // Form validation
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Reset error messages
+                document.querySelectorAll('.error-message').forEach(el => {
+                    el.style.display = 'none';
+                });
+                
+                // Get form values
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const username = document.getElementById('username').value.trim();
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                // Validate inputs
+                let isValid = true;
+                
+                if (firstName === '') {
+                    document.getElementById('firstNameError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (lastName === '') {
+                    document.getElementById('lastNameError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (username.length < 4 || username.length > 20) {
+                    document.getElementById('usernameError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (password.length < 8) {
+                    document.getElementById('passwordError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (password !== confirmPassword) {
+                    document.getElementById('confirmPasswordError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // If valid, proceed with signup
+                if (isValid) {
+                    // Here you would typically send the data to your server
+                    console.log('Signup attempt with:', { 
+                        firstName, 
+                        lastName, 
+                        username, 
+                        password 
+                    });
+                    
+                    // For demo purposes, redirect after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
